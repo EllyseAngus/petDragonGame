@@ -1,0 +1,61 @@
+def energyCheck(energy):
+  if energy >100:
+    energy = 100
+  return energy
+def eat(energy, dragon):
+  energy = energy + 30
+  energy =energyCheck(energy)
+  print("\nYou fed " + dragon + "!\n+30% energy\n" + dragon+"'s energy is at " + str(energy) + "%")
+  return energy
+def play(energy, dragon):
+  energy = energy - 5
+  energy =energyCheck(energy)
+  print("\nYou played with " + dragon +"!\n-5% energy\n" + dragon + "'s energy is at " + str(energy) + "%")
+  return energy
+def fly(energy, dragon):
+  energy = energy - 40
+  energy =energyCheck(energy)
+  print("\nYou flew with " + dragon + "!\n-40% energy\n" + dragon+ "'s energy is at " + str(energy) + "%")
+  return energy
+def drink(energy, dragon):
+  energy = energy + 10
+  energy =energyCheck(energy)
+  print("\nYou gave " + dragon + " a drink!\n+10% energy\n" + dragon + "'s energy is at " + str(energy) + "%")
+  return energy
+def sleep(energy, day, dragon):
+  energy = 100
+  print("\nDay " + str(day) + "\n"+ dragon + "'s energy has been replenished!")
+  return energy
+def end(energy, dragon):
+  if energy <= 0:
+    print("\n" + dragon + " has died.")
+    return 1
+  else:
+    return 0
+
+again = 0
+day1 = 1
+energy1 = 100
+print("\tintructions:\nYou have a baby dragon you have to take care of! Feed it, play with it, and take care of it! The commands are 'feed', 'drink', 'play', 'fly', and 'sleep'. If you put your dragon to bed, when it awakes, it will be a new day.")
+name = input("\nWhat do you want to name your pet? ")
+sure = input("Are you sure? ")
+while sure.lower() != "yes" and sure.lower() != "y":
+  name = input("\nWhat do you want to name your pet? ")
+  sure = input("Are you sure? ")
+while again == 0:
+  action = input("\nWhat action would you like to do? ")
+  while action.lower() != "feed" and action.lower() != "drink" and action.lower() != "play" and action.lower() != "fly" and action.lower() != "sleep":
+    action = input("\nWhat action would you like to do? ")
+  if action.lower()=="feed":
+    energy1 = eat(energy1, name)
+  elif action.lower()=="play":
+    energy1 = play(energy1, name)
+    again = end(energy1, name)
+  elif action.lower()=="fly":
+    energy1 = fly(energy1, name)
+    again = end(energy1, name)
+  elif action.lower()=="drink":
+    energy1 = drink(energy1, name)
+  else:
+    day1 +=1
+    energy1 =sleep(energy1, day1, name)
